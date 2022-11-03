@@ -182,7 +182,7 @@ if(isset($_GET['searchArtist'])) {
 }
 
 if($Artist == null) {
-    print_r(json_encode(['artist' => 'not found'], JSON_PRETTY_PRINT));
+    print_r(json_encode(['data' => 'not found'], JSON_PRETTY_PRINT));
 } else {
     $index      = rand(0, (count($Artist)-1));
     $Search     = $ApiSpotify->search($Artist[$index], 'artist', ['limit' => 2, 'market' => 'ID'])['artists']['items'];
@@ -234,5 +234,5 @@ if($Artist == null) {
         ]
     ];
     
-    print_r(json_encode(['artist' => $data], JSON_PRETTY_PRINT));
+    print_r(json_encode(['data' => $data], JSON_PRETTY_PRINT));
 }
