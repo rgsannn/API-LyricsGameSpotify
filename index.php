@@ -70,9 +70,13 @@ function replaceSpecialChar($char) {
 	return $finalStr;
 }
 
+$XRapidApiKey           = '4fa86eee60mshde0aec0bd2a1123p1c9e37jsn7f552fe99298';
+$ClientIdSpotify        = '096d851fcf6e47669a1ed6a14cadd36e';
+$ClientSecretSpotify    = '06d18f5b29ea432f911fff20ad332d70';
+
 $session = new SpotifyWebAPI\Session(
-    '096d851fcf6e47669a1ed6a14cadd36e',
-    '06d18f5b29ea432f911fff20ad332d70',
+    $ClientIdSpotify, // Client ID
+    $ClientSecretSpotify, // Client Secret
 );
 
 $session->requestCredentialsToken();
@@ -182,7 +186,7 @@ if(isset($_GET['searchArtist'])) {
 }
 
 if($Artist == null) {
-    print_r(json_encode(['artist' => 'not found'], JSON_PRETTY_PRINT));
+    print_r(json_encode(['data' => 'not found'], JSON_PRETTY_PRINT));
 } else {
     $index      = rand(0, (count($Artist)-1));
     $Search     = $ApiSpotify->search($Artist[$index], 'artist', ['limit' => 2, 'market' => 'ID'])['artists']['items'];
@@ -201,7 +205,7 @@ if($Artist == null) {
     $Language   = null;
     $GetMusic   = _curl('https://spotify23.p.rapidapi.com/track_lyrics/?id='.$SongId, 'GET', [
         "X-RapidAPI-Host: spotify23.p.rapidapi.com",
-        "X-RapidAPI-Key: 4fa86eee60mshde0aec0bd2a1123p1c9e37jsn7f552fe99298"
+        "X-RapidAPI-Key: {$XRapidApiKey}" // X-RapidAPI-Key
     ]);
     
     if(isset($GetMusic['lyrics'])) {
@@ -225,58 +229,13 @@ if($Artist == null) {
         'music' => [
             'SongId' => $SongId,
             'title' => $Name,
-            'lyricsLanguage' => $Language,
             'lyrics' => $LyricsStr
         ],
-        'game' => [
-            'soal' => $Soal,
-            'jawaban' => $Jawaban
+        'games' => [
+            'q' => $Soal,
+            'a' => $Jawaban
         ]
     ];
     
-    print_r(json_encode(['artist' => $data], JSON_PRETTY_PRINT));
+    print_r(json_encode(['data' => $data], JSON_PRETTY_PRINT));
 }
-
-
-// $index = 0;
-// for($z = $PageStart; $z < $PageEnd; $z++) {
-//     $Search     = $ApiSpotify->search($Artist[$z], 'artist', ['limit' => 2, 'market' => 'ID'])['artists']['items'];
-//     $artistId   = $Search['0']['id'];
-//     $artistName = $Search['0']['name'];
-//     if($Artist[$z] !== $artistName) {
-//         $artistId   = $Search['1']['id'];
-//         $artistName = $Search['1']['name'];
-//     }
-//     $data[] = [
-//         'id' => $artistId,
-//         'name' => $artistName,
-//     ];
-    
-//     $TopTracks  = $ApiSpotify->getArtistTopTracks($artistId, ['market' => 'ID']);
-//     for($i = 0; $i < 2; $i++) {
-//         $SongId     = $TopTracks['tracks'][$i]['id'];
-//         $Name       = $TopTracks['tracks'][$i]['name'];
-//         $LyricsStr  = null;
-//         $Language   = null;
-//         $GetMusic   = _curl('https://spotify23.p.rapidapi.com/track_lyrics/?id='.$SongId, 'GET', [
-//             "X-RapidAPI-Host: spotify23.p.rapidapi.com",
-//             "X-RapidAPI-Key: 4fa86eee60mshde0aec0bd2a1123p1c9e37jsn7f552fe99298"
-//         ]);
-//         if(isset($GetMusic['lyrics'])) {
-//             $Lyrics     = $GetMusic['lyrics']['lines'];
-//             $Language   = $GetMusic['lyrics']['language'];
-    
-//             $LyricsStr = '';
-//             for($o = 0; $o < count($Lyrics); $o++) {
-//                 $LyricsStr .= str_replace(["\u266a", "♪"], "", $Lyrics[$o]['words'])."\n";
-//             }
-//         }
-//         $data[$index]['music'][] = [
-//             'SongId' => $SongId,
-//             'title' => $Name,
-//             'lyricsLanguage' => $Language,
-//             'lyrics' => str_replace("\n\n", "\n", $LyricsStr),
-//         ];
-//     }
-//     $index++;
-// }
