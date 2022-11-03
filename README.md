@@ -21,7 +21,7 @@ $ClientSecretSpotify    = '06d18f5b29ea432f911fff20ad332d70';
 | End Point | Method | Parameter | Note |
 | ------------- | ------------- | ------------- | ------------- |
 | /  | GET  |   | Menampilkan data secara acak |
-| SearchArtist  | GET  | Nama Artist  | Menampilkan data berdasarkan artist tertentu |
+| searchArtist  | GET  | Nama Artist  | Menampilkan data berdasarkan artist tertentu |
 
 ## Response
 ```
