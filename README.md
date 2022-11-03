@@ -38,7 +38,7 @@ Mohon maaf jika kode nya acak acakkan, selebihnya anda dapat mengubahnya sendiri
 
 
 ### Artist
-Untuk artist anda dapat mengubahnya sendiri pada [kode ini](https://github.com/rgsannn/API-LyricsGameSpotify/blob/447bbe62164fcfb58ace783d117ddb668e0523a3/index.php#L89) asalkan artist tersebut terdaftar di spotify, berikut beberapa artist yang sudah saya tambahkan :
+Untuk artist anda dapat mengubahnya sendiri pada [kode ini](https://github.com/rgsannn/API-LyricsGameSpotify/blob/19540fbf0a8ecb0fefae907fded3255418aed328/config.php#L8) asalkan artist tersebut terdaftar di spotify, berikut beberapa artist yang sudah saya tambahkan :
   - Fourtwnty
   - Payung Teduh
   - Danilla
