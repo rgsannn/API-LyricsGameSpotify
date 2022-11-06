@@ -43,8 +43,7 @@ if($Artist == null) {
     $indexMusic = rand(0, (count($TopTracks['tracks'])-1));
     $SongId     = $TopTracks['tracks'][$indexMusic]['id'];
     $Name       = $TopTracks['tracks'][$indexMusic]['name'];
-    $LyricsStr  = null;
-    $Language   = null;
+    $LyricsStr  = '';
     $GetMusic   = _curl('https://spotify23.p.rapidapi.com/track_lyrics/?id='.$SongId, 'GET', [
         "X-RapidAPI-Host: spotify23.p.rapidapi.com",
         "X-RapidAPI-Key: {$XRapidApiKey}" // X-RapidAPI-Key
@@ -52,9 +51,7 @@ if($Artist == null) {
     
     if(isset($GetMusic['lyrics'])) {
         $Lyrics     = $GetMusic['lyrics']['lines'];
-        $Language   = $GetMusic['lyrics']['language'];
     
-        $LyricsStr = '';
         for($o = 0; $o < count($Lyrics); $o++) {
             $LyricsStr .= str_replace(["\u266a", "♪"], "", $Lyrics[$o]['words'])."\n";
         }
